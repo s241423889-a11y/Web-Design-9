@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gallery - Super Fruit Valley Padang Besar</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+    }
+
+    header {
+      background: #2e7d32;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    nav {
+      background: #1b5e20;
+      padding: 10px;
+      text-align: center;
+    }
+
+    nav a {
+      color: white;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .card {
+      background: white;
+      margin: 20px;
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 15px;
+    }
+
+    .gallery-item {
+      text-align: center;
+      background: #fafafa;
+      padding: 10px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 15px;
+      background: #2e7d32;
+      color: white;
+      margin-top: 20px;
+    }
+
+    input {
+      margin-bottom: 15px;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>Gallery</h1>
+  <p>Super Fruit Valley - Our Farm & Produce</p>
+</header>
+
+<nav>
+  <a href="index.html">Home</a>
+  <a href="about.html">About</a>
+  <a href="gallery.html">Gallery</a>
+  <a href="contact.html">Contact</a>
+</nav>
+
+<!-- GALLERY SECTION -->
+<div class="card">
+  <h2>Gallery</h2>
+
+  <div class="grid" id="galleryGrid">
+
+    <div class="gallery-item">
+      <img src="image/Lemon.jpeg" alt="Lemon">
+      <h3>Lemon</h3>
+    </div>
+
+    <div class="gallery-item">
+      <img src="image/Fig Fruit.jpeg" alt="Fig Fruit">
+      <h3>Fig Fruit</h3>
+    </div>
+
+    <div class="gallery-item">
+      <img src="image/Gac Fruit.jpeg" alt="Gac Fruit">
+      <h3>Gac Fruit</h3>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <p>&copy; 2024 Super Fruit Valley, Chuping, Perlis. All rights reserved.</p>
+</footer>
+
+<script>
+  const imageUpload = document.getElementById('imageUpload');
+  const imagePreview = document.getElementById('imagePreview');
+  const galleryGrid = document.getElementById('galleryGrid');
+
+  imageUpload.addEventListener('change', function(e) {
+    Array.from(e.target.files).forEach(file => {
+      if (file.type.startsWith('image/')) {
+        const reader = new FileReader();
+
+        reader.onload = function(e) {
+          const galleryItem = document.createElement('div');
+          galleryItem.className = 'gallery-item';
+
+          galleryItem.innerHTML = `
+            <img src="${e.target.result}" alt="${file.name}">
+            <h3>${file.name}</h3>
+          `;
+
+          imagePreview.appendChild(galleryItem);
+          galleryGrid.appendChild(galleryItem.cloneNode(true));
+        };
+
+        reader.readAsDataURL(file);
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
